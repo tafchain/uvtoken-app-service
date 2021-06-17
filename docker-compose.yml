@@ -1,0 +1,21 @@
+version: "3"
+services:
+  wallet:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: wallet
+    container_name: wallet
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./log:/app/log
+      # - ./config.yaml:/app/config.yaml
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        compress: "true"
